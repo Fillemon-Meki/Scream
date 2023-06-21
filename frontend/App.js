@@ -38,7 +38,7 @@ const AppContainer = () => {
             indicatorStyle: { backgroundColor: 'blue' }, // Customize the indicator color
             tabBarStyle: { backgroundColor: 'white' }, // Customize the tab bar background color
             lazy: true, // Load screens lazily
-            swipeEnabled: true, // Enable swipe between screens
+            swipeEnabled: false, // Enable swipe between screens
           }}
         >
           <Tab.Screen name="Home" component={HomeScreen} />
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   sidebarText: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginVertical: 20,
+    marginVertical: 60,
     marginHorizontal: 10,
   },
 });

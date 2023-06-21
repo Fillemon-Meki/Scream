@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView, Modal, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
   const waveAnimation = useRef(new Animated.Value(1)).current;
@@ -77,28 +79,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#e3e3e3',
   },
-  header: {
-    alignItems: 'center',
-    paddingTop: 50,
-    backgroundColor: '#EDEDEC',
-  },
-  settingsIcon: {
-    position: 'absolute',
-    top: 40,
-    right: 10,
-    padding: 10,
-  },
-  logo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#888',
-  },
-  tagline: {
-    paddingBottom: 20,
-    fontSize: 16,
-    color: '#888',
-    marginTop: 5,
-  },
   sidebarContainer: {
     flex: 1,
     backgroundColor: '#fff',
@@ -115,35 +95,18 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 10,
   },
-  navigation: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingHorizontal: 20,
-  },
-  navButton: {
-    paddingHorizontal: 15,
-    alignItems: 'center',
-    paddingRight: 25,
-  },
-  navButtonText: {
-    paddingBottom: 20,
-    fontSize: 16,
-    color: '#888',
-  },
   hero: {
     flex: 1,
-    paddingHorizontal: 20,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   callToActionButton: {
     backgroundColor: '#3C71E1',
-    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 240,
-    height: 240,
-    borderRadius: 120,
-    bottom: 150,
+    width: width * 0.6, // Adjust the width as needed
+    height: width * 0.6, // Adjust the height as needed
+    borderRadius: (width * 0.6) / 2, // To make it circular
     position: 'absolute',
   },
   callToActionButtonText: {
