@@ -26,7 +26,7 @@ const AppContainer = () => {
           <TouchableOpacity onPress={toggleSidebar} style={styles.settingsIcon}>
             <Icon name="settings-outline" size={24} color="#888" />
           </TouchableOpacity>
-          <Text style={styles.logo}>Scream</Text>
+          <Text style={styles.logo}>SCREAM</Text>
           <Text style={styles.tagline}>Your Emergency Guardian</Text>
         </View>
 
