@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { TabView, SceneMap } from 'react-native-tab-view';
 import HomeScreen from './pages/HomeScreen';
 import LocationScreen from './pages/LocationScreen';
 import ContactsScreen from './pages/ContactsScreen';
@@ -13,58 +12,52 @@ import AboutUs from './pages/AboutUs';
 
 const Tab = createMaterialTopTabNavigator();
 
-
-const App = () => {
+const AppContainer = () => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
-  const renderScene = SceneMap({
-    Home: HomeScreen,
-    Location: LocationScreen,
-    Contacts: ContactsScreen,
-  });
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={toggleSidebar} style={styles.settingsIcon}>
-          <Icon name="settings-outline" size={24} color="#888" />
-        </TouchableOpacity>
-        <Text style={styles.logo}>Scream</Text>
-        <Text style={styles.tagline}>Your Emergency Guardian</Text>
-      </View>
-<SafeAreaView>
-
-      <Tab.Navigator tabBarOptions={{ labelStyle: { fontSize: 14 } }}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Location" component={LocationScreen} />
-        <Tab.Screen name="Contacts" component={ContactsScreen} />
-        <Tab.Screen name="Community" component={CommunityScreen} />
-        <Tab.Screen name="Safety" component={SafetyTips} />
-        <Tab.Screen name="AboutUs" component={AboutUs} />
-      </Tab.Navigator>
-
-      <Modal visible={showSidebar} animationType="slide">
-        <View style={styles.sidebarContainer}>
-          <TouchableOpacity onPress={toggleSidebar} style={styles.closeIcon}>
-            <Icon name="close-outline" size={24} color="#888" />
-          </TouchableOpacity>
-          <Text style={styles.sidebarText}>Sidebar Content</Text>
-        </View>
-      </Modal>
-   
-      </SafeAreaView>
-    </View>
-  );
-};
-
-const AppContainer = () => {
   return (
     <NavigationContainer>
-      <App />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={toggleSidebar} style={styles.settingsIcon}>
+            <Icon name="settings-outline" size={24} color="#888" />
+          </TouchableOpacity>
+          <Text style={styles.logo}>Scream</Text>
+          <Text style={styles.tagline}>Your Emergency Guardian</Text>
+        </View>
+
+        <Tab.Navigator
+          screenOptions={{
+            tabBarScrollEnabled: true,
+            tabBarItemStyle: { width: 120 }, // Adjust the width of individual tabs as needed
+            tabBarLabelStyle: { fontSize: 14 }, // Customize label styles
+            indicatorStyle: { backgroundColor: 'blue' }, // Customize the indicator color
+            tabBarStyle: { backgroundColor: 'white' }, // Customize the tab bar background color
+            lazy: true, // Load screens lazily
+            swipeEnabled: true, // Enable swipe between screens
+          }}
+        >
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Location" component={LocationScreen} />
+          <Tab.Screen name="Contacts" component={ContactsScreen} />
+          <Tab.Screen name="Community" component={CommunityScreen} />
+          <Tab.Screen name="Safety" component={SafetyTips} />
+          <Tab.Screen name="AboutUs" component={AboutUs} />
+        </Tab.Navigator>
+
+        <Modal visible={showSidebar} animationType="slide">
+          <View style={styles.sidebarContainer}>
+            <TouchableOpacity onPress={toggleSidebar} style={styles.closeIcon}>
+              <Icon name="close-outline" size={24} color="#888" />
+            </TouchableOpacity>
+            <Text style={styles.sidebarText}>Sidebar Content</Text>
+          </View>
+        </Modal>
+      </View>
     </NavigationContainer>
   );
 };
@@ -111,11 +104,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 20,
     marginHorizontal: 10,
-  },
-  screenContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
