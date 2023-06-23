@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   sidebarText: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginVertical: 60,
+    marginVertical: 20,
     marginHorizontal: 10,
   },
 });
