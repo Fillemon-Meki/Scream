@@ -1,40 +1,75 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView, Modal, Dimensions } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Animated, Modal, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const HomeScreen = () => {
   const waveAnimation = useRef(new Animated.Value(1)).current;
   const [showSidebar, setShowSidebar] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+  const [isLongPress, setIsLongPress] = useState(false);
+  let longPressTimer;
 
-  const startWaveAnimation = () => {
-    Animated.sequence([
-      Animated.timing(waveAnimation, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(waveAnimation, {
-        toValue: 1.5,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      startWaveAnimation();
-    }, 900);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const navigation = useNavigation();
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
+  };
+
+  const startWaveAnimation = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(waveAnimation, {
+          toValue: 1.5,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(waveAnimation, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  };
+
+  const startCountdown = () => {
+    let countdownValue = 3;
+
+    const countdownInterval = setInterval(() => {
+      if (countdownValue > 1) {
+        setCountdown(countdownValue);
+        countdownValue -= 1;
+      } else if (countdownValue === 1) {
+        setCountdown('SCREAM');
+        countdownValue -= 1;
+      } else {
+        clearInterval(countdownInterval);
+        startWaveAnimation();
+        // Perform action after countdown completes
+        openContactsPage();
+      }
+    }, 1000);
+  };
+
+  const handleLongPress = () => {
+    setIsLongPress(true);
+
+    longPressTimer = setTimeout(() => {
+      startCountdown();
+    }, 3000);
+  };
+
+  const handlePressOut = () => {
+    setIsLongPress(false);
+    clearTimeout(longPressTimer);
+  };
+
+  const openContactsPage = () => {
+    // Open contacts page using the navigation object
+    navigation.navigate('Contacts');
   };
 
   return (
@@ -51,10 +86,15 @@ const HomeScreen = () => {
       </Modal>
       <View style={styles.hero}>
         <TouchableOpacity
-          style={[styles.callToActionButton, { transform: [{ scale: waveAnimation }] }]}
-          onPress={startWaveAnimation}
+          style={styles.callToActionButton}
+          onPress={startCountdown}
+          onLongPress={handleLongPress} // Initiate countdown on long press
+          onPressOut={handlePressOut} // Reset long press state on release
+          disabled={isLongPress || countdown !== 0} // Disable the button during countdown and long press
         >
-          <Text style={styles.callToActionButtonText}>SCREAM</Text>
+          <Animated.Text style={[styles.callToActionButtonText, { transform: [{ scale: waveAnimation }] }]}>
+            {countdown || 'SCREAM'}
+          </Animated.Text>
         </TouchableOpacity>
       </View>
 
@@ -66,9 +106,7 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>
-          © 2023 Scream. All rights reserved.
-        </Text>
+        <Text style={styles.footerText}>© 2023 Scream. All rights reserved.</Text>
       </View>
     </View>
   );

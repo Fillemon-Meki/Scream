@@ -38,7 +38,7 @@ const AppContainer = () => {
             indicatorStyle: { backgroundColor: 'blue' }, // Customize the indicator color
             tabBarStyle: { backgroundColor: 'white' }, // Customize the tab bar background color
             lazy: true, // Load screens lazily
-            swipeEnabled: false, // Enable swipe between screens
+            swipeEnabled: true, // Enable swipe between screens
           }}
         >
           <Tab.Screen name="Home" component={HomeScreen} />
