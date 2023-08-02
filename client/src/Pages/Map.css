@@ -1,0 +1,36 @@
+/* Add a new CSS class for the map container */
+.map-container {
+    position: relative;
+  }
+  
+  /* Style the map-buttons and move them to the left side */
+  .map-buttons {
+    position: absolute;
+    top: 16px;
+    right: 16px; /* Change 'left' to 'right' */
+    z-index: 1000; /* Ensure the buttons appear on top of the map */
+  }
+  
+  /* Style the search bar and buttons inside map-buttons */
+  .map-buttons input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .map-buttons button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  
+  .map-buttons button:last-child {
+    margin-right: 0;
+  }
+  

@@ -1,0 +1,106 @@
+/* UserContactPage.css */
+
+/* Container for Users and Contacts */
+.container {
+    display: flex;
+  }
+  
+  /* Styling for the Users List */
+  .users-list {
+    flex: 1;
+    max-width: 200px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+  }
+  
+  .users-list h2 {
+    margin-bottom: 10px;
+  }
+  
+  .users-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .users-list li {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    transition: background-color 0.2s ease;
+  }
+  
+  .users-list li:hover {
+    background-color: #e5e5e5;
+  }
+  
+  /* Styling for the Contacts */
+  .contacts {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .contacts h2 {
+    margin-bottom: 10px;
+  }
+  
+  .contacts form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .contacts form label {
+    margin-bottom: 5px;
+  }
+  
+  .contacts form input {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .contacts form button {
+    padding: 8px 12px;
+    background-color: #4299e1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contacts form button:hover {
+    background-color: #3182ce;
+  }
+  
+  .contacts ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .contacts li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .contacts li:last-child {
+    border-bottom: none;
+  }
+  
+  .contacts li button {
+    padding: 5px 8px;
+    background-color: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contacts li button:hover {
+    background-color: #c53030;
+  }
+  
